@@ -46,7 +46,7 @@ def analyze_audio_request(file_storage, reference_text: Optional[str]) -> Tuple[
             "message": f"Tipo de arquivo não permitido. Use: {', '.join(sorted(ALLOWED_AUDIO_EXTENSIONS))}"
         }, 200
 
-    api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY") or "AIzaSyCOzpQcsfQBwutmWZwX5KhYoXxvoKGG85U"
+    api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY") 
     if not api_key:
         return {
             "status": "config_error",
