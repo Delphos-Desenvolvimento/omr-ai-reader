@@ -1,0 +1,91 @@
+tags:
+  - OMR
+consumes:
+  - multipart/form-data
+parameters:
+  - name: file
+    in: formData
+    type: file
+    required: true
+    description: "Imagem da prova (extensões permitidas: png, jpg, jpeg)"
+  - name: gabarito
+    in: formData
+    type: string
+    required: true
+    description: 'String JSON com a lista de gabaritos (por ROI). Ex: [{"1":"a","2":"b"}, {"1":"c"}]'
+responses:
+  200:
+    description: Resposta de processamento (pode indicar sucesso, detecção incompleta ou erros tratáveis)
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: Processamento concluído com sucesso
+        resultados:
+          type: array
+          items:
+            type: object
+            properties:
+              area:
+                type: integer
+                example: 1
+              status:
+                type: string
+                example: complete
+              retangulo_detected:
+                type: boolean
+                example: true
+              bolhas_detectadas:
+                type: integer
+                example: 40
+              bolhas_esperadas:
+                type: integer
+                example: 40
+              todas_bolhas_detectadas:
+                type: boolean
+                example: true
+              respostas:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    questao:
+                      type: integer
+                      example: 1
+                    alternativa_marcada:
+                      type: integer
+                      example: 2
+                    alternativa_correta:
+                      type: integer
+                      example: 2
+                    correto:
+                      type: boolean
+                      example: true
+  400:
+    description: Requisição inválida (ex. JSON de gabarito inválido)
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          example: bad_request
+        message:
+          type: string
+          example: O gabarito fornecido não é um JSON válido.
+  500:
+    description: Erro interno durante o processamento
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          example: processing_error
+        message:
+          type: string
+          example: Erro ao processar a imagem
+
+

@@ -1,0 +1,67 @@
+tags:
+  - Audio
+consumes:
+  - multipart/form-data
+parameters:
+  - name: audio
+    in: formData
+    type: file
+    required: true
+    description: "Arquivo de áudio do aluno (formatos: mp3, wav, m4a, ogg)"
+  - name: texto
+    in: formData
+    type: string
+    required: false
+    description: "Texto de referência para comparação da leitura"
+responses:
+  200:
+    description: Resultado da análise do áudio
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        evaluation:
+          type: object
+          example:
+            status: success
+            evaluation:
+              overall_score: 5.5
+              fluency:
+                score: 5.0
+                feedback: "A leitura apresentou algumas hesitações notáveis, especialmente antes de '24 anos' e durante a pronúncia de 'Parnaíba'."
+              pronunciation:
+                score: 7.0
+                feedback: "A maioria das palavras foi pronunciada com clareza, com pequeno tropeço em 'Parnaíba'."
+              intonation:
+                score: 4.0
+                feedback: "Entonação predominantemente plana."
+              rhythm:
+                score: 5.0
+                feedback: "Ritmo inconsistente devido a pausas e hesitações."
+              pauses:
+                score: 4.5
+                feedback: "Pausas não naturais antes de '24 anos' e no início."
+              clarity:
+                score: 7.0
+                feedback: "Clareza geral boa, com pequeno desvio em 'Parnaíba'."
+              duration_seconds: 8.4
+              words_per_minute: 136.0
+              reference_used: false
+              alignment:
+                words_total: 19
+                words_read: 19
+                words_missing: []
+                words_inserted: []
+                words_substituted: []
+                accuracy_percent: 100.0
+              suggestions:
+                - "Pratique a leitura de textos curtos várias vezes para melhorar a fluidez."
+                - "Varie o tom de voz para tornar a fala mais expressiva."
+  400:
+    description: Erro de validação da entrada
+  500:
+    description: Erro interno no processamento
+
+

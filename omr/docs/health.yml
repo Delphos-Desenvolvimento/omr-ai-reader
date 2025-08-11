@@ -1,0 +1,7 @@
+tags:
+  - Health
+responses:
+  200:
+    description: API de Processamento OMR - Envie uma imagem para /api/processar-omr (docs em /apidocs)
+
+
