@@ -237,8 +237,5 @@ colins ia/
 - Para testar o pipeline de OMR localmente sem API, ajuste `IMAGEM_PROVA_COMPLETA` e `GABARITOS` em `scripts/main.py` e execute o script.
 
 
-### Licença
-
-Defina aqui a licença do projeto (ex.: MIT). Caso ainda não exista, recomenda-se adicionar um arquivo `LICENSE`.
 
 
